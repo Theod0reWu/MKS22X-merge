@@ -13,12 +13,18 @@ public class Merge{
       temp[i] = data[i];
     }
     int l = 1;
+    int [] current = temp; int [] mergeTo = data;
     while (l < data.length){
-      for (int i = 0; i < data.length; i+=l*2){
-        int f = i;
-        int s = i + l;
-        for (int a = 0 ; a < l; a++){
-          
+      if (current == data) {current = temp; mergeTo = data;}
+      else {current = data; mergeTo = temp;}
+      for (int i = 0; i < data.length;){
+        //int f = i;
+        //int s = i + l;
+        for (int f = i, s = i + 1 ; f < data.length && s < data.length;i++){
+          if (current[f] < current[s]) {
+            mergeTo[i] = current[f]; f++;
+          }
+          else if (current[s] < current[f])
         }
       }
       l*=2;
