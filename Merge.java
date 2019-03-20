@@ -50,7 +50,4 @@ public class Merge{
       ary[x+1] = orig;
     }//System.out.println(Arrays.toString(ary));
   }
-  System.out.println();
-}
-}
 }
