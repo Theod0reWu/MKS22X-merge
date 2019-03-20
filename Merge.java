@@ -1,8 +1,13 @@
-import java.util.Arrays;
+import java.util.*;
 public class Merge{
   public static void mergesort(int[]data){
-    int[] temp = new int[data.length];
-    int l = 1;
+    int[] temp = new int[data.length]; int max = 80;
+    //if (data.length < 20) {max = 4;}
+    int l = max;
+    for (int i = 0 ; i < data.length; i+=max){
+      if (i+max <= data.length) {insertionSort(data,i,i+max);}
+      else{insertionSort(data,i,data.length);}
+    }
     int [] current = temp; int [] mergeTo = data;
     while (l < data.length){
       if (current == data) {current = temp; mergeTo = data;}
@@ -25,8 +30,6 @@ public class Merge{
             mergeTo[i] = current[s]; s++;
           }
         }
-        //System.out.println("Next " + l + ":" +Arrays.toString(mergeTo));
-        //System.out.println("current: " + Arrays.toString(current));
       }
       l*=2;
     }
@@ -36,28 +39,15 @@ public class Merge{
       }
     }
   }
-  public static void mergesortRecursion(int[]data){
-    int[] temp = new int[data.length];
-    for (int i = 0; i < data.length ; i++){
-      temp[i] = data[i];
-    }
-    mergesort(data,temp, 0, data.length);
-  }
-  private static void mergesort(int[]data, int[]temp, int lo, int hi){
-    if(lo == hi){
-      return;
-    }
-    int middle = (hi-lo)/2;
-    mergesort(data, temp, lo, middle+1);
-    mergesort(data, temp, middle, hi);
-    for (int one = lo, two = middle ; middle < hi;){
-      if(temp[one] < temp[two]){}
-    }
-  }
-  public static void main(String[] args){
-    int[] data = new int[]{2,3,5,3,2,3,5,6,7,44,54,5,2,2,4,5,657,67,3,2,52432,43,4,3,2,1};
-    mergesort(data);
-    //System.out.println();
-    System.out.println(Arrays.toString(data));
+  public static void insertionSort(int[] ary,int lo, int hi){ //System.out.println(lo+":"+hi);
+    for (int i = lo+1; i < hi; i++){
+      int orig = ary[i];
+      int x = i-1;
+      while(x >= lo && ary[x] > orig){
+        ary[x+1] = ary[x];
+        x--;
+      }
+      ary[x+1] = orig;
+    }//System.out.println(Arrays.toString(ary));
   }
 }
